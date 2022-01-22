@@ -1,0 +1,1 @@
+docker container create --name mongodata --publish 27018:27017 --mount "type=bind,source=/home/brondol/Documents/Applications/mongo-data,destination=/data/db" --env MONGO_INITDB_ROOT_USERNAME=brondol --env MONGO_INITDB_ROOT_PASSWORD=brondol mongo:latest
