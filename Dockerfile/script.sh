@@ -63,3 +63,98 @@ docker container start expose
 docker container ls
 
 docker container stop expose
+
+# ENV Instruction
+docker build -t brondol/env env
+
+docker image inspect brondol/env
+
+docker container create --name env --env APP_PORT=9090 -p 9090:9090 brondol/env
+
+docker container start env
+
+docker container ls
+
+docker container logs env
+
+docker container stop env
+
+# VOLUME Instruction
+docker build -t brondol/volume volume
+
+docker image inspect brondol/volume
+
+docker container create --name volume -p 8080:8080 brondol/volume
+
+docker container start volume
+
+docker container logs volume
+
+docker container inspect volume
+
+#15a53c9a60b9aaddb3c294cde03e6f283f319acf0db3e40c5d4b4a992a6451f1
+
+docker volume ls
+
+# WORKDIR Instruction
+docker build -t brondol/workdir workdir
+
+docker container create --name workdir -p 8080:8080 brondol/workdir
+
+docker container start workdir
+
+docker container exec -i -t workdir /bin/sh
+
+# USER Instruction
+docker build -t brondol/user user
+
+docker container create --name user -p 8080:8080 brondol/user
+
+docker container start user
+
+docker container exec -i -t user /bin/sh
+
+# ARG Instruction
+docker build -t brondol/arg arg --build-arg app=pzn
+
+docker container create --name arg -p 8080:8080 brondol/arg
+
+docker container start arg
+
+docker container exec -i -t arg /bin/sh
+
+# HEALTHCHECK Instruction
+docker build -t brondol/health health
+
+docker container create --name health -p 8080:8080 brondol/health
+
+docker container start health
+
+docker container ls
+
+docker container inspect health
+
+# ENTRYPOINT Instruction
+docker build -t brondol/entrypoint entrypoint
+
+docker image inspect brondol/entrypoint
+
+docker container create --name entrypoint -p 8080:8080 brondol/entrypoint
+
+docker container start entrypoint
+
+# Multi Stage Build
+docker build -t brondol/multi multi
+
+docker image ls
+
+docker container create --name multi -p 8080:8080 brondol/multi
+
+docker container start multi
+
+# Docker Push
+docker tag brondol/multi registry.digitalocean.com/programmerzamannow/multi
+
+docker --config /Users/brondol/.docker-digital-ocean/ push registry.digitalocean.com/programmerzamannow/multi
+
+docker --config /Users/brondol/.docker-digital-ocean/ pull registry.digitalocean.com/programmerzamannow/multi
